@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multimodal UI Analyzer</title>
+  <link rel="stylesheet" href="/styles.css?v=3">
+</head>
+<body>
+  <main class="shell">
+    <section class="page-header">
+      <div class="header">
+        <div>
+          <h1>Multimodal UI Analyzer</h1>
+          <p>Загрузите скриншот интерфейса и получите структурированный JSON-анализ.</p>
+        </div>
+        <span class="badge">.NET 8 + Semantic Kernel</span>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="left-column">
+        <form id="analysis-form" class="panel form">
+          <label class="field">
+            <span>Модель</span>
+            <select id="model" name="model">
+              <option value="qwen2.5vl:7b" selected>qwen2.5vl:7b - лучший старт для UI/OCR</option>
+              <option value="llama3.2-vision:11b">llama3.2-vision:11b - reasoning и общее описание</option>
+              <option value="llava-llama3:8b">llava-llama3:8b - быстрый компромисс</option>
+              <option value="llava">llava - совместимость и слабое железо</option>
+            </select>
+          </label>
+
+          <div class="model-guide">
+            <h2>Как выбрать модель</h2>
+            <dl>
+              <div>
+                <dt>qwen2.5vl:7b</dt>
+                <dd>Лучше всего для UI-скриншотов, OCR, таблиц, мелкого текста и JSON-разметки. Рекомендовано для 8 GB VRAM.</dd>
+              </div>
+              <div>
+                <dt>llama3.2-vision:11b</dt>
+                <dd>Хороша для общего понимания картинки и reasoning, но тяжелее. На 8 GB VRAM может работать медленнее.</dd>
+              </div>
+              <div>
+                <dt>llava-llama3:8b</dt>
+                <dd>Компромисс между скоростью и качеством. Подходит для быстрых проверок, когда Qwen работает тяжеловато.</dd>
+              </div>
+              <div>
+                <dt>llava</dt>
+                <dd>Старая базовая модель. Использовать как fallback, если новые модели не запускаются или не помещаются в память.</dd>
+              </div>
+            </dl>
+          </div>
+
+          <label class="field">
+            <span>Изображение</span>
+            <input id="image" name="image" type="file" accept="image/png,image/jpeg,image/webp" required>
+          </label>
+
+          <label class="field">
+            <span>Промпт</span>
+            <textarea id="prompt" name="prompt" rows="4">Analyze this mobile UI screenshot. Detect visible UI elements, approximate coordinates, hierarchy, and accessibility issues.</textarea>
+          </label>
+
+          <div class="actions">
+            <button id="submit" type="submit">Analyze</button>
+            <span id="status" role="status"></span>
+          </div>
+
+          <div class="download-progress" id="download-progress" hidden>
+            <div class="download-progress__header">
+              <span id="download-title">Model download</span>
+              <strong id="download-percent">0%</strong>
+            </div>
+            <div class="download-progress__track">
+              <div class="download-progress__bar" id="download-bar"></div>
+            </div>
+            <div class="download-progress__status" id="download-status">Waiting...</div>
+          </div>
+        </form>
+
+        <div class="preview panel">
+          <h2>Preview</h2>
+          <div class="empty-preview" id="empty-preview">Файл ещё не выбран</div>
+          <img id="preview" alt="Uploaded screenshot preview">
+        </div>
+      </div>
+
+      <div class="result panel">
+        <h2>JSON</h2>
+        <pre id="output">{}</pre>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js?v=3"></script>
+</body>
+</html>
