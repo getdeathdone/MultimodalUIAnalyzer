@@ -1,0 +1,43 @@
+# Build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+
+# .NET
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.DotSettings.user
+
+# ASP.NET / local settings
+appsettings.Local.json
+appsettings.*.Local.json
+*.Development.json.user
+
+# Logs and diagnostics
+*.log
+logs/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
