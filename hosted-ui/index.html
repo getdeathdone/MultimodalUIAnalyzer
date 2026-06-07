@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multimodal UI Analyzer Setup</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="setup">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Local Vision Agent</p>
+        <h1>Анализ UI-скриншотов локально на вашем компьютере</h1>
+        <p class="lead">
+          Эта страница проверяет, запущен ли локальный Multimodal UI Analyzer.
+          Если приложение уже работает, браузер откроет его автоматически. Если нет,
+          используйте установку одной командой или скачайте пакет вручную.
+        </p>
+      </div>
+      <div id="statusBadge" class="status checking">Checking localhost...</div>
+    </section>
+
+    <section id="readyPanel" class="panel hidden">
+      <h2>Приложение уже запущено</h2>
+      <p>
+        Локальный сервер отвечает на <code>http://localhost:5088</code>.
+        Если ссылка не открылась автоматически, нажмите кнопку ниже.
+      </p>
+      <a class="button" href="http://localhost:5088/">Open app</a>
+    </section>
+
+    <section id="installPanel" class="panel hidden">
+      <h2>Установите локальный пакет</h2>
+      <p>
+        Браузер не может сам установить и запустить локальную программу без вашего действия.
+        Самый простой вариант: скопировать одну команду для вашей ОС. Она скачает приложение,
+        подготовит Ollama и откроет веб-интерфейс.
+      </p>
+
+      <div class="terminal-install">
+        <h3>Windows: одна команда в PowerShell</h3>
+        <p>
+          Команда скачает EXE в <code>%LOCALAPPDATA%\Programs\MultimodalUIAnalyzer</code>,
+          при необходимости скачает установщик Ollama и запустит приложение.
+        </p>
+        <div class="command-row">
+          <div>
+            <strong>Windows PowerShell</strong>
+            <code id="windowsCommand"></code>
+          </div>
+          <button id="copyWindows" type="button">Copy</button>
+        </div>
+      </div>
+
+      <div class="terminal-install">
+        <h3>macOS: одна команда в Terminal</h3>
+        <p>
+          Команда поставит Ollama через Homebrew, скачает архив приложения,
+          снимет quarantine-атрибуты и запустит локальный сервер. Если Homebrew не установлен,
+          скрипт откроет страницу установки Ollama и остановится с понятным сообщением.
+        </p>
+        <div class="command-row">
+          <div>
+            <strong>Apple Silicon</strong>
+            <code id="macArmCommand"></code>
+          </div>
+          <button id="copyMacArm" type="button">Copy</button>
+        </div>
+        <div class="command-row">
+          <div>
+            <strong>Intel Mac</strong>
+            <code id="macIntelCommand"></code>
+          </div>
+          <button id="copyMacIntel" type="button">Copy</button>
+        </div>
+      </div>
+
+      <h3>Ручная загрузка</h3>
+      <div class="downloads">
+        <a id="windowsDownload" class="download-card" href="./downloads/MultimodalUIAnalyzer-win-x64.exe">
+          <strong>Windows x64</strong>
+          <span>Один EXE-файл. Запускает сервер и открывает браузер.</span>
+        </a>
+        <a id="macArmDownload" class="download-card" href="./downloads/MultimodalUIAnalyzer-0.1.0-osx-arm64.zip">
+          <strong>macOS Apple Silicon</strong>
+          <span>M1, M2, M3, M4. Рекомендуется команда выше.</span>
+        </a>
+        <a id="macIntelDownload" class="download-card" href="./downloads/MultimodalUIAnalyzer-0.1.0-osx-x64.zip">
+          <strong>macOS Intel</strong>
+          <span>Для старых Mac на Intel.</span>
+        </a>
+      </div>
+
+      <div class="steps">
+        <div><strong>1</strong><span>Скопируйте команду для Windows или macOS.</span></div>
+        <div><strong>2</strong><span>Дождитесь установки Ollama и запуска приложения.</span></div>
+        <div><strong>3</strong><span>Модель Ollama скачивается позже, только когда вы выберете ее в приложении.</span></div>
+        <div><strong>4</strong><span>Нажмите Check again, если страница не перешла в приложение сама.</span></div>
+      </div>
+
+      <button id="checkAgain" type="button">Check again</button>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

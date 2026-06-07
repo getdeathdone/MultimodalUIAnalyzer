@@ -72,7 +72,7 @@ if "%WEB_ALREADY_RUNNING%"=="1" (
 
 echo [4/5] Starting web server...
 if "%WEB_ALREADY_RUNNING%"=="0" (
-    start "Multimodal UI Analyzer Server" cmd /k "cd /d ""%APP_DIR%"" && dotnet run --no-build --urls %APP_URL%"
+    start "Multimodal UI Analyzer Server" cmd /k "cd /d ""%APP_DIR%"" && dotnet bin\Debug\net8.0\MultimodalUIAnalyzer.dll --no-open"
     powershell -NoProfile -ExecutionPolicy Bypass -Command "$deadline=(Get-Date).AddSeconds(20); do { try { Invoke-WebRequest -UseBasicParsing '%APP_URL%' -TimeoutSec 2 | Out-Null; exit 0 } catch { Start-Sleep -Seconds 1 } } while ((Get-Date) -lt $deadline); exit 1" >nul 2>nul
     if errorlevel 1 (
         echo [ERROR] Web server did not respond on %APP_URL%.

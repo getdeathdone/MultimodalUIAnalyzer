@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Setup - Multimodal UI Analyzer</title>
+  <link rel="stylesheet" href="/styles.css?v=7">
+</head>
+<body>
+  <main class="shell">
+    <section class="setup-hero">
+      <div>
+        <span class="setup-kicker">Local vision setup</span>
+        <h1>Multimodal UI Analyzer</h1>
+        <p>Автоматическая настройка локального анализа UI-скриншотов через Ollama и Semantic Kernel.</p>
+      </div>
+      <div class="setup-hero__actions">
+        <a class="primary-link" id="open-app-link" href="/">Open app</a>
+        <a class="link-button" href="https://ollama.com/download" target="_blank" rel="noreferrer">Ollama page</a>
+      </div>
+    </section>
+
+    <section class="setup-steps">
+      <article class="panel setup-step">
+        <div class="step-number">1</div>
+        <div>
+          <h2>Run auto installer</h2>
+          <p>
+            Скопируйте одну команду под свою ОС. Она скачает приложение, подготовит Ollama и запустит локальный веб-сервер.
+            Браузер не может сделать это сам без вашего действия, поэтому команда запускается в PowerShell или Terminal.
+          </p>
+
+          <div class="setup-command-block">
+            <div class="setup-command-header">
+              <strong>Windows PowerShell</strong>
+              <button class="copy-command" type="button" data-copy-target="windows-auto-command">Copy</button>
+            </div>
+            <pre><code id="windows-auto-command"></code></pre>
+          </div>
+
+          <div class="setup-command-block">
+            <div class="setup-command-header">
+              <strong>macOS Apple Silicon</strong>
+              <button class="copy-command" type="button" data-copy-target="mac-arm-auto-command">Copy</button>
+            </div>
+            <pre><code id="mac-arm-auto-command"></code></pre>
+          </div>
+
+          <div class="setup-command-block">
+            <div class="setup-command-header">
+              <strong>macOS Intel</strong>
+              <button class="copy-command" type="button" data-copy-target="mac-intel-auto-command">Copy</button>
+            </div>
+            <pre><code id="mac-intel-auto-command"></code></pre>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel setup-step">
+        <div class="step-number">2</div>
+        <div>
+          <h2>What installer does</h2>
+          <p>
+            Windows: скачивает EXE в <code>%LOCALAPPDATA%\Programs\MultimodalUIAnalyzer</code>,
+            проверяет наличие Ollama, при необходимости скачивает <code>OllamaSetup.exe</code> и запускает его.
+          </p>
+          <p>
+            macOS: проверяет <code>ollama</code>, при наличии Homebrew выполняет <code>brew install ollama</code>,
+            скачивает ZIP приложения, снимает quarantine-атрибуты и запускает сервер.
+          </p>
+        </div>
+      </article>
+
+      <article class="panel setup-step">
+        <div class="step-number">3</div>
+        <div>
+          <h2>Manual package fallback</h2>
+          <p>
+            Если хотите без команды, можно скачать пакет вручную. Launcher внутри ZIP тоже теперь пытается подготовить Ollama,
+            а затем поднимает сервер и открывает браузер.
+          </p>
+          <div class="download-options">
+            <a class="download-option" href="/downloads/MultimodalUIAnalyzer-win-x64.exe">
+              <strong>Windows x64 EXE</strong>
+              <span>Самый простой вариант для Windows</span>
+            </a>
+            <a class="download-option" href="/downloads/MultimodalUIAnalyzer-0.1.0-osx-arm64.zip">
+              <strong>macOS Apple Silicon</strong>
+              <span>M1, M2, M3, M4</span>
+            </a>
+            <a class="download-option" href="/downloads/MultimodalUIAnalyzer-0.1.0-osx-x64.zip">
+              <strong>macOS Intel</strong>
+              <span>Старые Mac на Intel</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel setup-step">
+        <div class="step-number">4</div>
+        <div>
+          <h2>Open app and analyze</h2>
+          <p>
+            Когда сервер запущен, откройте приложение, выберите vision-модель, загрузите скриншот и нажмите Analyze.
+            Если выбранной модели ещё нет локально, приложение скачает только её и покажет прогресс.
+          </p>
+          <div class="step-actions">
+            <a class="primary-link" id="open-app-link-bottom" href="http://localhost:5088/">Open app</a>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const openAppLink = document.querySelector("#open-app-link");
+    const openAppLinkBottom = document.querySelector("#open-app-link-bottom");
+    const isLocalApp = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+    const appUrl = isLocalApp ? "/" : "http://localhost:5088/";
+    openAppLink.href = appUrl;
+    openAppLinkBottom.href = appUrl;
+
+    const hostedBase = `${location.origin}`;
+    const windowsAppUrl = `${hostedBase}/downloads/MultimodalUIAnalyzer-win-x64.exe`;
+    const windowsInstallerUrl = `${hostedBase}/install-windows.ps1`;
+    const macInstallerUrl = `${hostedBase}/install-mac.sh`;
+    const macArmZipUrl = `${hostedBase}/downloads/MultimodalUIAnalyzer-0.1.0-osx-arm64.zip`;
+    const macIntelZipUrl = `${hostedBase}/downloads/MultimodalUIAnalyzer-0.1.0-osx-x64.zip`;
+
+    document.querySelector("#windows-auto-command").textContent =
+      `powershell -ExecutionPolicy Bypass -Command "iwr -UseBasicParsing '${windowsInstallerUrl}' -OutFile $env:TEMP\\mua-install.ps1; & $env:TEMP\\mua-install.ps1 -AppUrl '${windowsAppUrl}'"`;
+
+    document.querySelector("#mac-arm-auto-command").textContent =
+      `curl -fsSL "${macInstallerUrl}" | bash -s -- "${macArmZipUrl}" osx-arm64`;
+
+    document.querySelector("#mac-intel-auto-command").textContent =
+      `curl -fsSL "${macInstallerUrl}" | bash -s -- "${macIntelZipUrl}" osx-x64`;
+
+    document.querySelectorAll("[data-copy-target]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const target = document.querySelector(`#${button.dataset.copyTarget}`);
+        await navigator.clipboard.writeText(target.textContent);
+        const original = button.textContent;
+        button.textContent = "Copied";
+        window.setTimeout(() => {
+          button.textContent = original;
+        }, 1200);
+      });
+    });
+  </script>
+</body>
+</html>

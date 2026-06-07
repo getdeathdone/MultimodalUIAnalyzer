@@ -13,4 +13,9 @@
     <PackageReference Include="Microsoft.SemanticKernel.Connectors.Ollama" Version="1.45.0-alpha" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="artifacts\**;hosted-ui\downloads\**;wwwroot\downloads\**" />
+    <None Remove="artifacts\**;hosted-ui\downloads\**;wwwroot\downloads\**" />
+  </ItemGroup>
+
 </Project>

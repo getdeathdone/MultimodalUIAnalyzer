@@ -3,6 +3,9 @@ bin/
 obj/
 **/bin/
 **/obj/
+artifacts/
+hosted-ui/downloads/
+wwwroot/downloads/
 
 # .NET
 *.user

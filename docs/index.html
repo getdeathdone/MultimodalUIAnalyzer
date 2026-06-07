@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multimodal UI Analyzer Setup</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="setup">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Local Vision Agent</p>
+        <h1>Multimodal UI Analyzer</h1>
+        <p class="lead">
+          Страница для GitHub Pages. Она проверяет локальное приложение на <code>localhost:5088</code>,
+          а установочные файлы скачивает с текущего сайта GitHub Pages.
+        </p>
+      </div>
+      <div id="statusBadge" class="status checking">Checking local app...</div>
+    </section>
+
+    <section id="readyPanel" class="panel hidden">
+      <h2>Приложение уже запущено</h2>
+      <p>Локальный сервер отвечает на <code>http://localhost:5088</code>.</p>
+      <a class="button" href="http://localhost:5088/">Open app</a>
+    </section>
+
+    <section id="installPanel" class="panel hidden">
+      <h2>Run auto installer</h2>
+      <p>
+        Скопируйте одну команду под свою ОС. Команда скачает приложение с этой страницы,
+        подготовит Ollama и запустит локальный веб-интерфейс.
+      </p>
+
+      <div class="terminal-install">
+        <div class="command-title">
+          <h3>Windows PowerShell</h3>
+          <button id="copyWindows" type="button">Copy</button>
+        </div>
+        <code id="windowsCommand"></code>
+      </div>
+
+      <div class="terminal-install">
+        <div class="command-title">
+          <h3>macOS Apple Silicon</h3>
+          <button id="copyMacArm" type="button">Copy</button>
+        </div>
+        <code id="macArmCommand"></code>
+      </div>
+
+      <div class="terminal-install">
+        <div class="command-title">
+          <h3>macOS Intel</h3>
+          <button id="copyMacIntel" type="button">Copy</button>
+        </div>
+        <code id="macIntelCommand"></code>
+      </div>
+
+      <h2>Manual download</h2>
+      <div class="downloads">
+        <a id="windowsDownload" class="download-card" href="./downloads/MultimodalUIAnalyzer-win-x64.exe">
+          <strong>Windows x64 EXE</strong>
+          <span>Скачать EXE вручную</span>
+        </a>
+        <a id="macArmDownload" class="download-card" href="./downloads/MultimodalUIAnalyzer-0.1.0-osx-arm64.zip">
+          <strong>macOS Apple Silicon</strong>
+          <span>M1, M2, M3, M4</span>
+        </a>
+        <a id="macIntelDownload" class="download-card" href="./downloads/MultimodalUIAnalyzer-0.1.0-osx-x64.zip">
+          <strong>macOS Intel</strong>
+          <span>Старые Mac на Intel</span>
+        </a>
+      </div>
+
+      <button id="checkAgain" type="button">Check again</button>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
