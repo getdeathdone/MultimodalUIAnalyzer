@@ -1,6 +1,6 @@
 param(
     [string]$AppUrl,
-    [string]$OllamaInstallerUrl = "https://ollama.com/download/OllamaSetup.exe"
+    [string]$OllamaInstallScriptUrl = "https://ollama.com/install.ps1"
 )
 
 $ErrorActionPreference = "Stop"
@@ -13,7 +13,6 @@ if ([string]::IsNullOrWhiteSpace($AppUrl)) {
 $installRoot = Join-Path $env:LOCALAPPDATA "Programs\MultimodalUIAnalyzer"
 $appPath = Join-Path $installRoot "MultimodalUIAnalyzer.exe"
 $ollamaPath = Join-Path $env:LOCALAPPDATA "Programs\Ollama\ollama.exe"
-$ollamaSetup = Join-Path $env:TEMP "OllamaSetup.exe"
 
 Write-Host "Multimodal UI Analyzer Windows setup"
 Write-Host ""
@@ -24,11 +23,8 @@ Write-Host "==> Downloading Multimodal UI Analyzer"
 Invoke-WebRequest -UseBasicParsing -Uri $AppUrl -OutFile $appPath
 
 if (-not (Test-Path $ollamaPath) -and -not (Get-Command ollama -ErrorAction SilentlyContinue)) {
-    Write-Host "==> Ollama was not found. Downloading Ollama installer"
-    Invoke-WebRequest -UseBasicParsing -Uri $OllamaInstallerUrl -OutFile $ollamaSetup
-    Write-Host "==> Starting Ollama installer"
-    Write-Host "    Finish the Ollama installer window if it appears."
-    Start-Process -FilePath $ollamaSetup -Wait
+    Write-Host "==> Ollama was not found. Installing with PowerShell install script"
+    Invoke-RestMethod -Uri $OllamaInstallScriptUrl | Invoke-Expression
 }
 else {
     Write-Host "==> Ollama is already installed"

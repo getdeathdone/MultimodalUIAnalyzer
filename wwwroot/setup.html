@@ -62,7 +62,7 @@
           <h2>What installer does</h2>
           <p>
             Windows: скачивает EXE в <code>%LOCALAPPDATA%\Programs\MultimodalUIAnalyzer</code>,
-            проверяет наличие Ollama, при необходимости скачивает <code>OllamaSetup.exe</code> и запускает его.
+            проверяет наличие Ollama и при необходимости ставит её через <code>irm https://ollama.com/install.ps1 | iex</code>.
           </p>
           <p>
             macOS: проверяет <code>ollama</code>, при наличии Homebrew выполняет <code>brew install ollama</code>,

@@ -4,7 +4,6 @@ setlocal
 set "APP_URL=http://localhost:5088"
 set "APP_EXE=%~dp0MultimodalUIAnalyzer.exe"
 set "OLLAMA_URL=http://localhost:11434"
-set "OLLAMA_SETUP=%TEMP%\OllamaSetup.exe"
 
 echo.
 echo === Multimodal UI Analyzer ===
@@ -23,17 +22,13 @@ if errorlevel 1 (
     if exist "%LOCALAPPDATA%\Programs\Ollama\ollama.exe" (
         set "OLLAMA_EXE=%LOCALAPPDATA%\Programs\Ollama\ollama.exe"
     ) else (
-        echo       Ollama is not installed. Downloading installer...
-        powershell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-WebRequest -UseBasicParsing 'https://ollama.com/download/OllamaSetup.exe' -OutFile '%OLLAMA_SETUP%'" 
+        echo       Ollama is not installed. Installing with PowerShell install script...
+        powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://ollama.com/install.ps1 | iex"
         if errorlevel 1 (
-            echo [WARN] Could not download Ollama installer.
+            echo [WARN] Could not install Ollama automatically.
             echo        Install it manually from https://ollama.com/download
             goto start_app
         )
-
-        echo       Starting Ollama installer...
-        echo       Finish the installer window if it appears.
-        start /wait "" "%OLLAMA_SETUP%"
 
         if exist "%LOCALAPPDATA%\Programs\Ollama\ollama.exe" (
             set "OLLAMA_EXE=%LOCALAPPDATA%\Programs\Ollama\ollama.exe"
