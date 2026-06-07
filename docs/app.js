@@ -32,7 +32,7 @@ function getBaseUrl() {
 
 function buildWindowsCommand() {
   const baseUrl = getBaseUrl();
-  const appUrl = `${baseUrl}/downloads/MultimodalUIAnalyzer-win-x64.exe`;
+  const appUrl = `${baseUrl}/downloads/MultimodalUIAnalyzer-0.1.0-win-x64.zip`;
   return `powershell -ExecutionPolicy Bypass -Command "iwr -UseBasicParsing '${baseUrl}/install-windows.ps1' -OutFile $env:TEMP\\mua-install.ps1; & $env:TEMP\\mua-install.ps1 -AppUrl '${appUrl}'"`;
 }
 

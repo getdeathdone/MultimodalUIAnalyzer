@@ -72,12 +72,6 @@ foreach ($runtime in $runtimes) {
     Copy-Item -Path $archivePath -Destination (Join-Path $wwwrootDownloads $runtime.Archive) -Force
     Copy-Item -Path $archivePath -Destination (Join-Path $docsDownloads $runtime.Archive) -Force
 
-    if ($rid -eq "win-x64") {
-        Copy-Item -Path (Join-Path $publishDir "MultimodalUIAnalyzer.exe") -Destination (Join-Path $hostedDownloads "MultimodalUIAnalyzer-win-x64.exe") -Force
-        Copy-Item -Path (Join-Path $publishDir "MultimodalUIAnalyzer.exe") -Destination (Join-Path $wwwrootDownloads "MultimodalUIAnalyzer-win-x64.exe") -Force
-        Copy-Item -Path (Join-Path $publishDir "MultimodalUIAnalyzer.exe") -Destination (Join-Path $docsDownloads "MultimodalUIAnalyzer-win-x64.exe") -Force
-    }
-
     Write-Host "Created $archivePath"
 }
 

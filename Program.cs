@@ -10,6 +10,9 @@ var shouldOpenBrowser = !args.Any(arg => arg.Equals("--no-open", StringCompariso
 var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.UseUrls(AppUrl);
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+AddBuiltInDefaultsIfMissing(builder.Configuration);
 
 builder.Services.AddOptions<VisionAnalysisOptions>()
     .Bind(builder.Configuration.GetSection(VisionAnalysisOptions.SectionName))
@@ -160,5 +163,36 @@ static bool IsHttpEndpointAvailable(string url)
     catch
     {
         return false;
+    }
+}
+
+static void AddBuiltInDefaultsIfMissing(ConfigurationManager configuration)
+{
+    var defaults = new Dictionary<string, string?>
+    {
+        ["Ai:Provider"] = "Ollama",
+        ["Ai:ServiceId"] = "vision-chat",
+        ["Ai:OpenAI:ModelId"] = "gpt-4o",
+        ["Ai:OpenAI:ApiKey"] = "",
+        ["Ai:OpenAI:OrganizationId"] = "",
+        ["Ai:Ollama:ModelId"] = "qwen2.5vl:7b",
+        ["Ai:Ollama:Models:0"] = "qwen2.5vl:7b",
+        ["Ai:Ollama:Models:1"] = "llama3.2-vision:11b",
+        ["Ai:Ollama:Models:2"] = "llava-llama3:8b",
+        ["Ai:Ollama:Models:3"] = "llava",
+        ["Ai:Ollama:Endpoint"] = "http://localhost:11434",
+        ["VisionAnalysis:MaxImageBytes"] = (10 * 1024 * 1024).ToString(),
+        ["VisionAnalysis:AllowedMimeTypes:0"] = "image/png",
+        ["VisionAnalysis:AllowedMimeTypes:1"] = "image/jpeg",
+        ["VisionAnalysis:AllowedMimeTypes:2"] = "image/webp"
+    };
+
+    var missingDefaults = defaults
+        .Where(item => string.IsNullOrWhiteSpace(configuration[item.Key]))
+        .ToDictionary(item => item.Key, item => item.Value);
+
+    if (missingDefaults.Count > 0)
+    {
+        configuration.AddInMemoryCollection(missingDefaults);
     }
 }
