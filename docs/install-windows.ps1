@@ -1,9 +1,9 @@
-$ErrorActionPreference = "Stop"
-
 param(
     [string]$AppUrl,
     [string]$OllamaInstallerUrl = "https://ollama.com/download/OllamaSetup.exe"
 )
+
+$ErrorActionPreference = "Stop"
 
 if ([string]::IsNullOrWhiteSpace($AppUrl)) {
     Write-Host "Usage: install-windows.ps1 -AppUrl <MultimodalUIAnalyzer-win-x64.exe URL>"
