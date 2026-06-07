@@ -79,4 +79,4 @@ echo.
 echo Ready: %APP_URL%
 echo Missing Ollama models are downloaded lazily from the web UI.
 echo.
-pause
+exit /b 0

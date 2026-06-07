@@ -90,4 +90,4 @@ echo.
 echo Ready: %APP_URL%
 echo Keep the server window open while using the app.
 echo.
-pause
+exit /b 0

@@ -13,6 +13,7 @@ if ([string]::IsNullOrWhiteSpace($AppUrl)) {
 $installRoot = Join-Path $env:LOCALAPPDATA "Programs\MultimodalUIAnalyzer"
 $appPath = Join-Path $installRoot "MultimodalUIAnalyzer.exe"
 $ollamaPath = Join-Path $env:LOCALAPPDATA "Programs\Ollama\ollama.exe"
+$localAppUrl = "http://localhost:5088"
 
 Write-Host "Multimodal UI Analyzer Windows setup"
 Write-Host ""
@@ -31,7 +32,29 @@ else {
 }
 
 Write-Host "==> Starting Multimodal UI Analyzer"
-Start-Process -FilePath $appPath
+Start-Process -FilePath $appPath -ArgumentList @("--no-open")
+
+Write-Host "==> Waiting for local web app"
+$deadline = (Get-Date).AddSeconds(45)
+do {
+    try {
+        Invoke-WebRequest -UseBasicParsing -Uri $localAppUrl -TimeoutSec 2 | Out-Null
+        break
+    }
+    catch {
+        Start-Sleep -Seconds 1
+    }
+} while ((Get-Date) -lt $deadline)
+
+try {
+    Invoke-WebRequest -UseBasicParsing -Uri $localAppUrl -TimeoutSec 2 | Out-Null
+}
+catch {
+    throw "The app did not respond on $localAppUrl"
+}
+
+Write-Host "==> Opening browser"
+Start-Process $localAppUrl
 
 Write-Host ""
-Write-Host "Done. The browser should open http://localhost:5088"
+Write-Host "Done. Opened $localAppUrl"
