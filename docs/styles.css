@@ -202,57 +202,9 @@ code {
   outline: 2px solid rgba(37, 99, 235, 0.14);
 }
 
-.developer-card {
-  gap: 10px;
-  max-width: 720px;
-  padding: 16px;
-}
-
-.developer-card h2 {
-  font-size: 18px;
-}
-
-.developer-card dl {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px 18px;
-  margin: 0;
-}
-
-.developer-card div {
-  display: grid;
-  grid-template-columns: 76px minmax(0, 1fr);
-  gap: 8px;
-  align-items: baseline;
-}
-
-.developer-card dt {
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.developer-card dd {
-  min-width: 0;
-  margin: 0;
-  font-size: 14px;
-  overflow-wrap: anywhere;
-}
-
-.developer-card a {
-  color: var(--accent);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.developer-card a:hover {
-  text-decoration: underline;
-}
-
 @media (max-width: 760px) {
   .hero,
-  .downloads,
-  .developer-card dl {
+  .downloads {
     grid-template-columns: 1fr;
   }
 
