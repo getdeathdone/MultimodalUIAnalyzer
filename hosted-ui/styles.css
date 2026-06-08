@@ -77,6 +77,44 @@ h3 { font-size: 17px; }
   line-height: 1.55;
 }
 
+.developer-plaque {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 14px;
+  padding: 7px 9px;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.08);
+  color: var(--text);
+  font-size: 13px;
+}
+
+.developer-plaque span,
+.developer-plaque a {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.developer-plaque strong {
+  font-weight: 800;
+}
+
+.developer-plaque a {
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #dbeafe;
+  text-decoration: none;
+}
+
+.developer-plaque a:hover {
+  background: #bfdbfe;
+}
+
 .status {
   border-radius: 6px;
   font-weight: 700;
@@ -246,5 +284,9 @@ code {
   .downloads,
   .developer-card dl {
     grid-template-columns: 1fr;
+  }
+
+  .developer-plaque {
+    width: 100%;
   }
 }
