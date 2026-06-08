@@ -138,6 +138,45 @@ h3 { font-size: 16px; }
   gap: 16px;
 }
 
+.app-summary {
+  grid-template-columns: minmax(220px, 0.78fr) minmax(280px, 1.25fr);
+  gap: 14px 20px;
+}
+
+.summary-label {
+  display: inline-flex;
+  margin-bottom: 6px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.app-summary p {
+  line-height: 1.55;
+}
+
+.app-summary ul {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.app-summary li {
+  min-height: 76px;
+  padding: 12px;
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  color: var(--muted);
+  background: #f8fbff;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
 .terminal-install {
   padding: 16px;
   border: 1px solid var(--line);
@@ -204,7 +243,9 @@ code {
 
 @media (max-width: 760px) {
   .hero,
-  .downloads {
+  .downloads,
+  .app-summary,
+  .app-summary ul {
     grid-template-columns: 1fr;
   }
 
