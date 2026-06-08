@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Setup - Multimodal UI Analyzer</title>
-  <link rel="stylesheet" href="/styles.css?v=7">
+  <link rel="stylesheet" href="/styles.css?v=8">
 </head>
 <body>
   <main class="shell">
@@ -12,7 +12,7 @@
       <div>
         <span class="setup-kicker">Local vision setup</span>
         <h1>Multimodal UI Analyzer</h1>
-        <p>Автоматическая настройка локального анализа UI-скриншотов через Ollama и Semantic Kernel.</p>
+        <p>Automatic setup for local UI screenshot analysis with Ollama and Semantic Kernel.</p>
       </div>
       <div class="setup-hero__actions">
         <a class="primary-link" id="open-app-link" href="/">Open app</a>
@@ -24,10 +24,10 @@
       <article class="panel setup-step">
         <div class="step-number">1</div>
         <div>
-          <h2>Run auto installer</h2>
+          <h2>Run Auto Installer</h2>
           <p>
-            Скопируйте одну команду под свою ОС. Она скачает приложение, подготовит Ollama и запустит локальный веб-сервер.
-            Браузер не может сделать это сам без вашего действия, поэтому команда запускается в PowerShell или Terminal.
+            Copy one command for your operating system. It downloads the app, prepares Ollama, starts the local web server,
+            waits for it to respond, and opens the browser.
           </p>
 
           <div class="setup-command-block">
@@ -59,14 +59,14 @@
       <article class="panel setup-step">
         <div class="step-number">2</div>
         <div>
-          <h2>What installer does</h2>
+          <h2>What The Installer Does</h2>
           <p>
-            Windows: скачивает EXE в <code>%LOCALAPPDATA%\Programs\MultimodalUIAnalyzer</code>,
-            проверяет наличие Ollama и при необходимости ставит её через <code>irm https://ollama.com/install.ps1 | iex</code>.
+            Windows: downloads the full ZIP package into <code>%LOCALAPPDATA%\Programs\MultimodalUIAnalyzer</code>,
+            checks Ollama, and installs it with <code>irm https://ollama.com/install.ps1 | iex</code> when needed.
           </p>
           <p>
-            macOS: проверяет <code>ollama</code>, при наличии Homebrew выполняет <code>brew install ollama</code>,
-            скачивает ZIP приложения, снимает quarantine-атрибуты и запускает сервер.
+            macOS: checks <code>ollama</code>, installs it with <code>brew install ollama</code> when Homebrew is available,
+            downloads the app ZIP, removes quarantine attributes, and starts the server.
           </p>
         </div>
       </article>
@@ -74,15 +74,15 @@
       <article class="panel setup-step">
         <div class="step-number">3</div>
         <div>
-          <h2>Manual package fallback</h2>
+          <h2>Manual Package Fallback</h2>
           <p>
-            Если хотите без команды, можно скачать пакет вручную. Launcher внутри ZIP тоже теперь пытается подготовить Ollama,
-            а затем поднимает сервер и открывает браузер.
+            You can also download the package manually. The launcher inside the ZIP prepares Ollama, starts the server,
+            and opens the browser.
           </p>
           <div class="download-options">
             <a class="download-option" href="/downloads/MultimodalUIAnalyzer-0.1.0-win-x64.zip">
               <strong>Windows x64 ZIP</strong>
-              <span>Полный пакет с приложением и web UI</span>
+              <span>Full package with the app and web UI</span>
             </a>
             <a class="download-option" href="/downloads/MultimodalUIAnalyzer-0.1.0-osx-arm64.zip">
               <strong>macOS Apple Silicon</strong>
@@ -90,7 +90,7 @@
             </a>
             <a class="download-option" href="/downloads/MultimodalUIAnalyzer-0.1.0-osx-x64.zip">
               <strong>macOS Intel</strong>
-              <span>Старые Mac на Intel</span>
+              <span>Older Intel-based Macs</span>
             </a>
           </div>
         </div>
@@ -99,10 +99,10 @@
       <article class="panel setup-step">
         <div class="step-number">4</div>
         <div>
-          <h2>Open app and analyze</h2>
+          <h2>Open App And Analyze</h2>
           <p>
-            Когда сервер запущен, откройте приложение, выберите vision-модель, загрузите скриншот и нажмите Analyze.
-            Если выбранной модели ещё нет локально, приложение скачает только её и покажет прогресс.
+            Once the server is running, open the app, choose a vision model, upload a screenshot, and click Analyze.
+            If the selected Ollama model is missing, the app downloads only that model and shows progress.
           </p>
           <div class="step-actions">
             <a class="primary-link" id="open-app-link-bottom" href="http://localhost:5088/">Open app</a>

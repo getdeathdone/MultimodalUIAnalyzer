@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Multimodal UI Analyzer</title>
-  <link rel="stylesheet" href="/styles.css?v=4">
+  <link rel="stylesheet" href="/styles.css?v=8">
 </head>
 <body>
   <main class="shell">
@@ -12,7 +12,7 @@
       <div class="header">
         <div>
           <h1>Multimodal UI Analyzer</h1>
-          <p>Загрузите скриншот интерфейса и получите структурированный JSON-анализ.</p>
+          <p>Upload a UI screenshot and get a structured JSON analysis.</p>
         </div>
         <div class="header-actions">
           <a class="link-button" href="/setup.html">Setup</a>
@@ -25,44 +25,44 @@
       <div class="left-column">
         <form id="analysis-form" class="panel form">
           <label class="field">
-            <span>Модель</span>
+            <span>Model</span>
             <select id="model" name="model">
-              <option value="qwen2.5vl:7b" selected>qwen2.5vl:7b - лучший старт для UI/OCR</option>
-              <option value="llama3.2-vision:11b">llama3.2-vision:11b - reasoning и общее описание</option>
-              <option value="llava-llama3:8b">llava-llama3:8b - быстрый компромисс</option>
-              <option value="llava">llava - совместимость и слабое железо</option>
+              <option value="qwen2.5vl:7b" selected>qwen2.5vl:7b - best starting point for UI/OCR</option>
+              <option value="llama3.2-vision:11b">llama3.2-vision:11b - reasoning and general image understanding</option>
+              <option value="llava-llama3:8b">llava-llama3:8b - fast quality/speed compromise</option>
+              <option value="llava">llava - fallback for older or weaker hardware</option>
             </select>
           </label>
 
           <div class="model-guide">
-            <h2>Как выбрать модель</h2>
+            <h2>Model Guide</h2>
             <dl>
               <div>
                 <dt>qwen2.5vl:7b</dt>
-                <dd>Лучше всего для UI-скриншотов, OCR, таблиц, мелкого текста и JSON-разметки. Рекомендовано для 8 GB VRAM.</dd>
+                <dd>Best for UI screenshots, OCR, tables, small text, and JSON layout extraction. Recommended for 8 GB VRAM.</dd>
               </div>
               <div>
                 <dt>llama3.2-vision:11b</dt>
-                <dd>Хороша для общего понимания картинки и reasoning, но тяжелее. На 8 GB VRAM может работать медленнее.</dd>
+                <dd>Good for broad visual understanding and reasoning, but heavier. It can be slower on 8 GB VRAM.</dd>
               </div>
               <div>
                 <dt>llava-llama3:8b</dt>
-                <dd>Компромисс между скоростью и качеством. Подходит для быстрых проверок, когда Qwen работает тяжеловато.</dd>
+                <dd>A speed/quality compromise for quick checks when Qwen feels too heavy.</dd>
               </div>
               <div>
                 <dt>llava</dt>
-                <dd>Старая базовая модель. Использовать как fallback, если новые модели не запускаются или не помещаются в память.</dd>
+                <dd>Older baseline model. Use it as a fallback when newer models do not fit in memory or fail to run.</dd>
               </div>
             </dl>
           </div>
 
           <label class="field">
-            <span>Изображение</span>
+            <span>Image</span>
             <input id="image" name="image" type="file" accept="image/png,image/jpeg,image/webp" required>
           </label>
 
           <label class="field">
-            <span>Промпт</span>
+            <span>Prompt</span>
             <textarea id="prompt" name="prompt" rows="4">Analyze this mobile UI screenshot. Detect visible UI elements, approximate coordinates, hierarchy, and accessibility issues.</textarea>
           </label>
 
@@ -85,7 +85,7 @@
 
         <div class="preview panel">
           <h2>Preview</h2>
-          <div class="empty-preview" id="empty-preview">Файл ещё не выбран</div>
+          <div class="empty-preview" id="empty-preview">No file selected yet</div>
           <img id="preview" alt="Uploaded screenshot preview">
         </div>
       </div>
@@ -97,6 +97,6 @@
     </section>
   </main>
 
-  <script src="/app.js?v=4"></script>
+  <script src="/app.js?v=8"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,38 +11,38 @@
     <section class="hero">
       <div>
         <p class="eyebrow">Local Vision Agent</p>
-        <h1>Анализ UI-скриншотов локально на вашем компьютере</h1>
+        <h1>Multimodal UI Analyzer</h1>
         <p class="lead">
-          Эта страница проверяет, запущен ли локальный Multimodal UI Analyzer.
-          Если приложение уже работает, браузер откроет его автоматически. Если нет,
-          используйте установку одной командой или скачайте пакет вручную.
+          This page checks whether the local Multimodal UI Analyzer is running.
+          If it is already running, the browser opens it automatically. If not,
+          use the one-command installer or download the package manually.
         </p>
       </div>
       <div id="statusBadge" class="status checking">Checking localhost...</div>
     </section>
 
     <section id="readyPanel" class="panel hidden">
-      <h2>Приложение уже запущено</h2>
+      <h2>App Is Running</h2>
       <p>
-        Локальный сервер отвечает на <code>http://localhost:5088</code>.
-        Если ссылка не открылась автоматически, нажмите кнопку ниже.
+        The local server is responding at <code>http://localhost:5088</code>.
+        If the page did not open automatically, use the button below.
       </p>
       <a class="button" href="http://localhost:5088/">Open app</a>
     </section>
 
     <section id="installPanel" class="panel hidden">
-      <h2>Установите локальный пакет</h2>
+      <h2>Install The Local Package</h2>
       <p>
-        Браузер не может сам установить и запустить локальную программу без вашего действия.
-        Самый простой вариант: скопировать одну команду для вашей ОС. Она скачает приложение,
-        подготовит Ollama и откроет веб-интерфейс.
+        A browser page cannot install or launch a local program by itself.
+        The easiest path is to copy one command for your operating system.
+        It downloads the app, prepares Ollama, and opens the web UI.
       </p>
 
       <div class="terminal-install">
-        <h3>Windows: одна команда в PowerShell</h3>
+        <h3>Windows: One PowerShell Command</h3>
         <p>
-          Команда скачает EXE в <code>%LOCALAPPDATA%\Programs\MultimodalUIAnalyzer</code>,
-          при необходимости поставит Ollama через быстрый PowerShell install script и запустит приложение.
+          The command downloads the full ZIP package into <code>%LOCALAPPDATA%\Programs\MultimodalUIAnalyzer</code>,
+          installs Ollama with the fast PowerShell install script when needed, and starts the app.
         </p>
         <div class="command-row">
           <div>
@@ -54,11 +54,11 @@
       </div>
 
       <div class="terminal-install">
-        <h3>macOS: одна команда в Terminal</h3>
+        <h3>macOS: One Terminal Command</h3>
         <p>
-          Команда поставит Ollama через Homebrew, скачает архив приложения,
-          снимет quarantine-атрибуты и запустит локальный сервер. Если Homebrew не установлен,
-          скрипт откроет страницу установки Ollama и остановится с понятным сообщением.
+          The command installs Ollama with Homebrew, downloads the app archive,
+          removes quarantine attributes, and starts the local server. If Homebrew is not installed,
+          the script opens the Ollama download page and stops with a clear message.
         </p>
         <div class="command-row">
           <div>
@@ -76,27 +76,27 @@
         </div>
       </div>
 
-      <h3>Ручная загрузка</h3>
+      <h3>Manual Download</h3>
       <div class="downloads">
         <a id="windowsDownload" class="download-card" href="./downloads/MultimodalUIAnalyzer-0.1.0-win-x64.zip">
           <strong>Windows x64 ZIP</strong>
-          <span>Полный пакет с приложением и web UI.</span>
+          <span>Full package with the app and web UI.</span>
         </a>
         <a id="macArmDownload" class="download-card" href="./downloads/MultimodalUIAnalyzer-0.1.0-osx-arm64.zip">
           <strong>macOS Apple Silicon</strong>
-          <span>M1, M2, M3, M4. Рекомендуется команда выше.</span>
+          <span>M1, M2, M3, M4. The command above is recommended.</span>
         </a>
         <a id="macIntelDownload" class="download-card" href="./downloads/MultimodalUIAnalyzer-0.1.0-osx-x64.zip">
           <strong>macOS Intel</strong>
-          <span>Для старых Mac на Intel.</span>
+          <span>For older Intel-based Macs.</span>
         </a>
       </div>
 
       <div class="steps">
-        <div><strong>1</strong><span>Скопируйте команду для Windows или macOS.</span></div>
-        <div><strong>2</strong><span>Дождитесь установки Ollama и запуска приложения.</span></div>
-        <div><strong>3</strong><span>Модель Ollama скачивается позже, только когда вы выберете ее в приложении.</span></div>
-        <div><strong>4</strong><span>Нажмите Check again, если страница не перешла в приложение сама.</span></div>
+        <div><strong>1</strong><span>Copy the command for Windows or macOS.</span></div>
+        <div><strong>2</strong><span>Wait for Ollama and the app to be installed and started.</span></div>
+        <div><strong>3</strong><span>Ollama models download later, only when you choose a model in the app.</span></div>
+        <div><strong>4</strong><span>Click Check again if the page does not switch to the app automatically.</span></div>
       </div>
 
       <button id="checkAgain" type="button">Check again</button>
